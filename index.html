@@ -46,14 +46,54 @@
     <main class="container py-4">
         <div class="hero-section text-center mb-4"><h1 class="gradient-text">World Builder</h1><p class="text-muted">Generate entire fantasy worlds procedurally</p></div>
     <div class="glass-card p-4 text-center mb-4">
-        <canvas id="worldCanvas" width="600" height="400" style="width:100%;background:#1a3a5c;border-radius:12px;"></canvas>
-        <div class="d-flex gap-2 justify-content-center mt-3"><button class="btn btn-primary" id="genWorld">🌍 Generate World</button><button class="btn btn-secondary" id="genName">📝 Name It</button></div>
-        <div id="worldInfo" class="mt-3 text-left"></div>
+        <div style="display:flex; flex-wrap:wrap; gap:1rem; align-items:flex-start;">
+            <div style="flex:2; min-width:300px; position:relative;">
+                <canvas id="worldCanvas" width="800" height="600" style="width:100%;background:#020205;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.5); cursor:crosshair;"></canvas>
+                <div id="tooltip" style="position:absolute; display:none; background:rgba(10,10,20,0.9); border:1px solid var(--border); padding:8px 12px; border-radius:6px; color:#fff; font-size:0.8rem; pointer-events:none; z-index:10;"></div>
+            </div>
+            
+            <div style="flex:1; min-width:250px; text-align:left; display:flex; flex-direction:column; gap:1rem;">
+                <div class="glass-card p-3">
+                    <h4 style="margin-top:0;">🛠️ Generator Controls</h4>
+                    <div style="display:flex; flex-direction:column; gap:0.5rem; margin-top:1rem;">
+                        <label style="font-size:0.85rem; color:var(--text-muted);">Sea Level</label>
+                        <input type="range" id="seaLevel" min="0.2" max="0.8" step="0.01" value="0.45" style="width:100%">
+                        
+                        <label style="font-size:0.85rem; color:var(--text-muted); margin-top:0.5rem;">Temperature Bias</label>
+                        <input type="range" id="tempBias" min="-0.3" max="0.3" step="0.01" value="0" style="width:100%">
+                        
+                        <label style="font-size:0.85rem; color:var(--text-muted); margin-top:0.5rem;">View Mode</label>
+                        <select id="viewMode" class="form-control" style="font-size:0.85rem; padding:6px;">
+                            <option value="biome">Biomes & Terrain</option>
+                            <option value="elevation">Elevation Map</option>
+                            <option value="temperature">Temperature Map</option>
+                            <option value="moisture">Moisture Map</option>
+                        </select>
+                        
+                        <div style="display:flex; gap:0.5rem; margin-top:0.5rem;">
+                            <label style="font-size:0.85rem; color:var(--text); display:flex; align-items:center; gap:5px;"><input type="checkbox" id="showCities" checked> Cities</label>
+                            <label style="font-size:0.85rem; color:var(--text); display:flex; align-items:center; gap:5px;"><input type="checkbox" id="showBorders" checked> Borders</label>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2 mt-3">
+                        <button class="btn btn-primary" id="genWorld" style="flex:1;">🌍 Generate</button>
+                    </div>
+                </div>
+
+                <div class="glass-card p-3">
+                    <h4 style="margin-top:0; display:flex; justify-content:space-between; align-items:center;">📜 Lore Editor <button id="genLoreBtn" class="btn btn-secondary btn-sm">Auto-Gen</button></h4>
+                    <input type="text" id="worldName" class="form-control mb-2" placeholder="World Name" style="font-weight:bold; font-size:1.1rem; background:rgba(0,0,0,0.2);">
+                    <textarea id="loreEditor" class="form-control" rows="8" placeholder="The history and lore of this world..." style="font-size:0.85rem; resize:vertical; background:rgba(0,0,0,0.2);"></textarea>
+                </div>
+            </div>
+        </div>
     </div>
     </main>
     <footer class="footer"><div class="container copyright text-center py-4">© 2026 QuickUtils. All rights reserved.</div></footer>
     <script src="quickutils-core.js"></script>
     <script src="script.js"></script>
+
+
 
 
 
@@ -175,6 +215,8 @@
    </div>
 </div>
 <!-- /QuickUtils Network Promo -->
+
+
 
 
 
